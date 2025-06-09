@@ -29,6 +29,8 @@ std::vector<std::string> read_lines(const std::string& fname) {
 }
 
 int main(int argc, char** argv) {
+    printf("MPI\n");
+
     MPI_Init(&argc, &argv);
     int rank, nprocs;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);

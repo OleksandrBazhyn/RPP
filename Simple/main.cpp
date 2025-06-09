@@ -1,4 +1,3 @@
-#include <omp.h>
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -29,7 +28,7 @@ std::vector<std::string> read_lines(const std::string& fname) {
 }
 
 int main() {
-    printf("OpenMP\n");
+    printf("Simple C++\n");
 
     // 1. Read both files into memory
     std::vector<std::string> lines1 = read_lines("C:\\My Source Code\\Навчання\\Університет\\РПП\\lab\\RPP\\a.txt");
@@ -46,8 +45,7 @@ int main() {
     std::vector<int> matches;       // indices of matching lines from lines1
     std::vector<bool> matched(n1, false); // mark which lines from lines1 have a match
 
-    // 4. Parallel loop: each thread compares a subset of lines1 to all of lines2 using OpenMP
-#pragma omp parallel for schedule(dynamic)
+    // 4. Sequentially compare each line from lines1 to all lines from lines2 using hash
     for (int i = 0; i < n1; ++i) {
         const std::string& s = lines1[i];
         uint64_t h = string_hash(s);
