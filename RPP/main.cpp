@@ -6,6 +6,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <algorithm>
+#include <chrono>
 
 // Simple polynomial rolling hash for a string (like Rabin-Karp)
 uint64_t string_hash(const std::string& s) {
@@ -30,6 +31,11 @@ std::vector<std::string> read_lines(const std::string& fname) {
 
 int main(int argc, char** argv) {
     printf("MPI\n");
+
+    typedef std::chrono::high_resolution_clock clock;
+    typedef std::chrono::time_point<clock> time_point;
+
+    time_point startTP = std::chrono::high_resolution_clock::now();
 
     MPI_Init(&argc, &argv);
     int rank, nprocs;
@@ -149,5 +155,10 @@ int main(int argc, char** argv) {
     }
 
     MPI_Finalize();
+
+    time_point endTP = std::chrono::high_resolution_clock::now();
+    double elapsed_sec = std::chrono::duration<double>(endTP - startTP).count();
+    std::cout << "Elapsed time: " << elapsed_sec << " seconds" << std::endl;
+
     return 0;
 }
