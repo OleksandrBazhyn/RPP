@@ -20,6 +20,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="big_text.txt" />
+    <Text Include="a.txt" />
+    <Text Include="b.txt" />
   </ItemGroup>
 </Project>
